@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 //获取到视频的宽和高
             }
         });
+        //loadVideo("rtsp://admin:abc123@10.20.10.96:554/cam/realmonitor?channel=1&subtype=0");
     }
 
     public void loadVideo(String path) {
@@ -106,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_button:
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*"); //选择视频 （mp4 3gp 是android支持的视频格式）
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(intent, 1);
+                loadVideo("rtsp://admin:abc123@10.20.10.96:554/cam/realmonitor?channel=1&subtype=0");
+                //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                //intent.setType("*/*"); //选择视频 （mp4 3gp 是android支持的视频格式）
+                //intent.addCategory(Intent.CATEGORY_OPENABLE);
+                //startActivityForResult(intent, 1);
                 break;
         }
     }
@@ -119,7 +121,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
+            String uri = data.getData().toString();
+
+            Toast.makeText(MainActivity.this, uri + " ", Toast.LENGTH_SHORT).show();
+            loadVideo(uri);
+            /*
             if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
                 path = uri.getPath();
 //                Toast.makeText(this, path + "11111", Toast.LENGTH_SHORT).show();
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 path = getRealPathFromURI(uri);
                 Toast.makeText(MainActivity.this, path + " ", Toast.LENGTH_SHORT).show();
                 loadVideo(path);
-            }
+            }*/
         }
     }
 

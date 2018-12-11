@@ -118,6 +118,7 @@ public class VideoPlayerIJK extends FrameLayout {
         createPlayer();
         try {
             mMediaPlayer.setDataSource(mPath);
+            //mMediaPlayer.setAvFormatOption("rtsp_transport", "tcp");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -137,7 +138,7 @@ public class VideoPlayerIJK extends FrameLayout {
             mMediaPlayer.release();
         }
         IjkMediaPlayer ijkMediaPlayer = new IjkMediaPlayer();
-        ijkMediaPlayer.native_setLogLevel(IjkMediaPlayer.IJK_LOG_DEBUG);
+        ijkMediaPlayer.native_setLogLevel(IjkMediaPlayer.IJK_LOG_VERBOSE);
 
 //        //开启硬解码
         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
@@ -180,7 +181,7 @@ public class VideoPlayerIJK extends FrameLayout {
 
     public void pause() {
         if (mMediaPlayer != null) {
-            mMediaPlayer.pause();
+            //mMediaPlayer.pause();
         }
     }
 
@@ -193,14 +194,14 @@ public class VideoPlayerIJK extends FrameLayout {
 
     public void reset() {
         if (mMediaPlayer != null) {
-            mMediaPlayer.reset();
+            //mMediaPlayer.reset();
         }
     }
 
 
     public long getDuration() {
         if (mMediaPlayer != null) {
-            return mMediaPlayer.getDuration();
+            return 0;//mMediaPlayer.getDuration();
         } else {
             return 0;
         }
@@ -209,7 +210,7 @@ public class VideoPlayerIJK extends FrameLayout {
 
     public long getCurrentPosition() {
         if (mMediaPlayer != null) {
-            return mMediaPlayer.getCurrentPosition();
+            return 0;//mMediaPlayer.getCurrentPosition();
         } else {
             return 0;
         }
